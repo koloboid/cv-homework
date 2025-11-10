@@ -1,6 +1,5 @@
 import asyncio
 import logging
-import os
 
 from injector import Injector
 
@@ -13,18 +12,18 @@ from coursework.processing_lane import ProcessingLane
 from coursework.processing_sign import ProcessingSign
 
 
-logging.basicConfig(
-    level=logging.DEBUG if bool(os.environ.get("DEBUG")) else logging.INFO,
-    format="%(asctime)s\t%(name)s\t%(levelname)s\t%(message)s",
-)
 logger = logging.getLogger("MAIN")
 
 
 async def main() -> None:
+    config = Config()
+    logging.basicConfig(
+        level=logging.DEBUG if config.debug else logging.INFO,
+        format="%(asctime)s\t%(name)s\t%(levelname)s\t%(message)s",
+    )
     logger.info("Starting coursework application")
     capture = None
     output = None
-    config = Config()
     try:
         injector = Injector()
         injector.binder.bind(Config, to=config)

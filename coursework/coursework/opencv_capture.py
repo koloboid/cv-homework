@@ -38,13 +38,18 @@ class OpenCVCapture:
             raise RuntimeError("Capture not initialized")
         logger.info("Starting capture loop")
         while True:
+            frame_start = monotonic()
             ret, image = self.cap.read()
             if not ret:
-                logger.error("Failed to read frame from capture")
-                continue
-            frame = Frame(image=image, timestamp=monotonic())
+                logger.error(
+                    "Failed to read frame from capture. Probably the stream ended. Exiting capture loop.",
+                )
+                break
+            frame = Frame(image=image, timestamp=frame_start)
             self._frame_callback(frame)
-            await asyncio.sleep(1 / self._config.capture_fps)
+            await asyncio.sleep(
+                1 / self._config.capture_fps - (monotonic() - frame_start),
+            )
 
     async def stop(self) -> None:
         if self.cap is not None:
