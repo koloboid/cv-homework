@@ -1,0 +1,144 @@
+target-version = "py39"
+line-length = 120
+
+[lint.isort]
+lines-after-imports = 2
+known-first-party = [
+    "AdvancedGeoMath",
+    "Alexmos",
+    "CameraAxesControl",
+    "ConstantRobotics",
+    "FakeSerialAsync",
+    "gimbal_interface",
+    "GstIrSdk",
+    "log_bunch",
+    "MavlinkBunch",
+    "mediamtx",
+    "MetaAsync",
+    "NoCH",
+    "osd",
+    "PyDTC",
+    "PyMicrohard",
+    "pyrpid",
+    "VideoCentaur",
+    "VideoCentaurAsync",
+    "utils",
+    "core_models",
+    "network_utils",
+    "flashdrive",
+]
+
+[lint.pyupgrade]
+keep-runtime-typing = true
+
+[lint.pylint]
+max-args = 10
+
+[lint]
+# Define which rules to use
+# Use all pycodestyle errors that start with E4, E7, E9
+# Also use all Pyflakes rules - F
+# And we want the McCabe complexity check with C90
+# Oh, and enable the isort with I
+# And the pep8-naming rules with N
+# And flake8-bandit rules with S
+# How about some trailing comma goodies with COM812 and COM818?
+# UP     - Automatic upgrade of syntax to the newest possible version (based on the target-version)
+# FA     - Enable flake8-future-annotations to check if typing annotation syntax can be
+#           modernized using the `from __future__ import annotaitons`
+#           or a file contains a newer syntax then the target-version supports
+#           but is missing the `from __future__ import annotations` statement
+# ANN    - check for missing type annotations
+# ASYNC  - incldue the flake8-async rule-set
+# BLE001 - forbid the blind exceptions catch
+# FBT    - forbid bolean traps
+# B      - enable flake8-bugbear rules
+# A      - enable the oversahdowing of the builtin names (flake8-builtins)
+# C4     - Write better Python comprehensions with flake8-comprehensions
+# ISC    - Implicit string concatenation
+# ICN    - Use import conventions
+# LOG    - flake8-logging rules
+# G      - flake8-logging-format logging format rules
+# PIE    - flake8-pie rules
+# PT     - flake8-pytest-style in case we have tests some day =D
+# Q      - double qouted strings for the win!
+# RSE    - don't raise exceptions with empty parnthesis
+# RET    - flake8-return rules
+# SLF    - no private memebers access
+# SIM    - flake8-simplify rules
+# TCH    - flake8-type-checking rules
+# TID    -  flake8-tidy-imports rules
+# ARG    - flake8-unused-arguments remove any anused arguments for any functions and methods
+# PTH    - Use Path lib(!) :D
+# PD     - pandas-vet rules
+# PGH    - pygrep-hooks rules
+# PL     - All of the Pylint rules: https://docs.astral.sh/ruff/rules/#pylint-pl
+# TRY    - tryceratops rules related to exceptions raising and handling
+# FLY    - no static string joins
+# NPY    - NumPy specific rules
+# FAST   - FastAPI specific rules
+# PERF   - Perflint micro-optimizations rules
+# FURB   - use a modern approach for simple things
+# RUF    - Ruff set of rules
+# Full list of available options:
+# https://docs.astral.sh/ruff/rules/
+select = [
+    "E4",
+    "E7",
+    "E9",
+    "F",
+    "C90",
+    "I",
+    "N",
+    "S",
+    "COM812",
+    "COM818",
+    "UP",
+    "FA",
+    "ANN",
+    "ASYNC",
+    "BLE001",
+    "FBT",
+    "B",
+    "A",
+    "C4",
+    "ISC",
+    "ICN",
+    "LOG",
+    "G",
+    "PIE",
+    "PT",
+    "Q",
+    "RSE",
+    "RET",
+    "SLF",
+    "SLOT",
+    "SIM",
+    "TCH",
+    "INT",
+    "TID",
+    "ARG",
+    "PTH",
+    "PD",
+    "PGH",
+    "PL",
+    "TRY",
+    "FLY",
+    "NPY",
+    "PERF",
+    "FURB",
+    "RUF",
+]
+
+
+# Which rules to ingore
+# Maybe we want to ingore the doc-line-too-long warning rule
+# of pycodestyle, and pep8 naming rule for classes
+# Ignore missing type annotations for `self` and `cls` with ANN101, ANN102
+# Allow Any types for function input variables with ANN401
+# Allow f-strings in log statements
+ignore = ["W505", "N801", "ANN401", "G004", "RET504", "N999", "TRY003", "TC001"]
+
+# Allow fix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+unfixable = []
