@@ -1,24 +1,28 @@
-from typing import NamedTuple
+from typing import Generic, TypeVar
 
 
-class Box(NamedTuple):
+T = TypeVar("T", int, float)
+
+
+class Box(Generic[T]):
+    def __init__(self, x: T, y: T, width: T, height: T) -> None:
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+
     @classmethod
-    def from_tlrb(cls, tlrb: tuple[float, float, float, float]) -> "Box":
+    def from_tlrb(cls, tlrb: tuple[T, T, T, T]) -> "Box":
         x1, y1, x2, y2 = tlrb
         return cls(x=x1, y=y1, width=x2 - x1, height=y2 - y1)
 
     @property
-    def right(self) -> float:
+    def right(self) -> T:
         return self.x + self.width
 
     @property
-    def bottom(self) -> float:
+    def bottom(self) -> T:
         return self.y + self.height
-
-    x: float
-    y: float
-    width: float
-    height: float
 
     def multiply(self, mul_x: float, mul_y: float) -> "Box":
         return Box(
@@ -29,9 +33,17 @@ class Box(NamedTuple):
         )
 
     def to_int(self) -> "Box":
-        return Box(
+        return Box[int](
             x=int(self.x),
             y=int(self.y),
             width=int(self.width),
             height=int(self.height),
+        )
+
+    def to_float(self) -> "Box":
+        return Box[float](
+            x=float(self.x),
+            y=float(self.y),
+            width=float(self.width),
+            height=float(self.height),
         )

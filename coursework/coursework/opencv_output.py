@@ -28,15 +28,26 @@ class OpenCVDisplayOutput:
         elif key == ord("0"):
             self._config.draw_roi = "original"
             logger.info(f"Draw ROI set to {self._config.draw_roi}")
-        elif key == ord("3"):
-            self._config.draw_roi = "edges"
+        elif key == ord("1"):
+            self._config.draw_roi = "masked"
             logger.info(f"Draw ROI set to {self._config.draw_roi}")
         elif key == ord("2"):
             self._config.draw_roi = "blurred"
             logger.info(f"Draw ROI set to {self._config.draw_roi}")
-        elif key == ord("1"):
-            self._config.draw_roi = "masked"
+        elif key == ord("3"):
+            self._config.draw_roi = "edges"
             logger.info(f"Draw ROI set to {self._config.draw_roi}")
+        elif key == ord("4"):
+            self._config.draw_roi = "warped"
+            logger.info(f"Draw ROI set to {self._config.draw_roi}")
+        elif key == ord("9"):
+            self._config.draw_found_lines = not self._config.draw_found_lines
+            logger.info(f"Draw found lines set to {self._config.draw_found_lines}")
+        elif key == ord("8"):
+            self._config.draw_filtered_lines = not self._config.draw_filtered_lines
+            logger.info(
+                f"Draw filtered lines set to {self._config.draw_filtered_lines}",
+            )
 
     async def init(self) -> None:
         pass

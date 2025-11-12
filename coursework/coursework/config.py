@@ -14,12 +14,14 @@ class Config(BaseSettings):
     capture_width: int = 640
     capture_height: int = 480
 
+    lane_max_slope: float = 3.0
+    lane_min_slope: float = 0.2
     lane_crop: Box = Box(0.0, 0.6, 1.0, 0.25)
 
     draw_metrics: bool = True
-    draw_found_lines: bool = True
-    draw_filtered_lines: bool = True
-    draw_roi: Literal["blurred", "edges", "original", "masked"] = "original"
+    draw_found_lines: bool = False
+    draw_filtered_lines: bool = False
+    draw_roi: Literal["blurred", "edges", "original", "masked", "warped"] = "original"
 
     model_config = SettingsConfigDict(
         extra="ignore",
