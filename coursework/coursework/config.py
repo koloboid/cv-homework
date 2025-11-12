@@ -1,7 +1,9 @@
-from typing import Union
+from typing import Literal, Union
 
 from injector import singleton
 from pydantic_settings import BaseSettings, CliImplicitFlag, SettingsConfigDict
+
+from coursework.common_types import Box
 
 
 @singleton
@@ -12,7 +14,12 @@ class Config(BaseSettings):
     capture_width: int = 640
     capture_height: int = 480
 
-    lane_crop: tuple[float, float, float, float] = (0.0, 0.6, 1.0, 0.25)
+    lane_crop: Box = Box(0.0, 0.6, 1.0, 0.25)
+
+    draw_metrics: bool = True
+    draw_found_lines: bool = True
+    draw_filtered_lines: bool = True
+    draw_roi: Literal["blurred", "edges", "original", "masked"] = "original"
 
     model_config = SettingsConfigDict(
         extra="ignore",
